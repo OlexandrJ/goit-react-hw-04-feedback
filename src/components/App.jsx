@@ -4,15 +4,18 @@ import Statistics from './Statistics';
 import Section from './Section';
 
 const App = () => {
-  const [state, setState] = useState({
+  const [feedback, setFeedback] = useState({
     good: 0,
     neutral: 0,
     bad: 0
   });
 
   const handleFeedback = (type) => {
-    setState((prev) => ({ ...prev, [type]: prev[type] + 1 }));
+    setFeedback((prevFeedback) => ({ ...prevFeedback, [type]: prevFeedback[type] + 1 }));
   };
+
+  const { good, neutral, bad } = feedback;
+  const totalFeedback = good + neutral + bad;
 
   return (
     <div>
@@ -20,9 +23,9 @@ const App = () => {
       <Section title="Please leave feedback">
         <FeedbackOptions options={['good', 'neutral', 'bad']} onLeaveFeedback={handleFeedback} />
       </Section>
-      {state.good + state.neutral + state.bad > 0 ? (
+      {totalFeedback > 0 ? (
         <Section title="Statistics">
-          <Statistics good={state.good} neutral={state.neutral} bad={state.bad} />
+          <Statistics good={good} neutral={neutral} bad={bad} total={totalFeedback} />
         </Section>
       ) : (
         <p>No feedback given</p>

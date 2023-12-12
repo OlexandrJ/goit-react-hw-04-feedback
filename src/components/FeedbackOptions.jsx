@@ -1,7 +1,7 @@
 import React from 'react';
 
 const FeedbackOptions = ({ options, onLeaveFeedback }) => (
-  <div  className="statisticsSection">
+  <div className="statisticsSection">
     {options.map((option) => (
       <button key={option} onClick={() => onLeaveFeedback(option)}>
         {option}
